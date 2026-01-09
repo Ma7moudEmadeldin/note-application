@@ -14,26 +14,36 @@ class addItem extends StatelessWidget {
         backgroundColor: kSecondyColor,
         onPressed: () {
           showModalBottomSheet(
+            isScrollControlled: true,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadiusGeometry.circular(20)),
             context: context,
             builder: (context) {
-              return Container(
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    children: [
-                      textField(
-                        hintText: 'Title',
+              return Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          textField(
+                            hintText: 'Title',
+                          ),
+                          textField(
+                            hintText: 'Description',
+                            maxLines: 10,
+                          ),
+                          customButton(
+                            text: 'Add Note',
+                            onTap: () {},
+                          )
+                        ],
                       ),
-                      textField(
-                        hintText: 'Description',
-                        maxLines: 10,
-                      ),
-                      customButton(
-                        text: 'Add Note',
-                        onTap: () {},
-                      )
-                    ],
-                  ));
+                    )),
+              );
             },
           );
         },
