@@ -23,7 +23,7 @@ class notes_Item extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Flutter Tips',
+                  'Flutter Tipss',
                   style: TextStyle(fontSize: 38),
                 ),
                 SizedBox(
