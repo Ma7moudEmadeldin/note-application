@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/widgets/addItem.dart';
 import 'package:store_app/widgets/custom_app_bar.dart';
-import 'package:store_app/widgets/notes_item.dart';
 import 'package:store_app/widgets/notes_list_view.dart';
 
 void main() {
@@ -16,8 +16,7 @@ class shoppingApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: Scaffold(
-        floatingActionButton:
-            FloatingActionButton(child: Icon(Icons.add), onPressed: () {}),
+        floatingActionButton: addItem(),
         body: Column(
           children: [
             customAppBar(),
