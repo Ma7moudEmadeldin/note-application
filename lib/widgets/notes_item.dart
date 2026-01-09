@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/consts.dart';
 
 class notes_Item extends StatelessWidget {
   const notes_Item({
@@ -10,8 +11,7 @@ class notes_Item extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 99, 74, 1),
-          borderRadius: BorderRadius.circular(10)),
+          color: kPrimaryColor, borderRadius: BorderRadius.circular(10)),
       height: 250,
       width: double.infinity,
       child: Row(
@@ -22,9 +22,12 @@ class notes_Item extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Flutter Tips',
-                  style: TextStyle(fontSize: 38),
+                Padding(
+                  padding: EdgeInsetsGeometry.only(left: 10),
+                  child: Text(
+                    'Flutter Tips',
+                    style: TextStyle(fontSize: 38),
+                  ),
                 ),
                 SizedBox(
                   height: 20,
@@ -42,7 +45,7 @@ class notes_Item extends StatelessWidget {
             ),
           ),
           SizedBox(
-            width: 40,
+            width: 80,
           ),
           Expanded(
             child: Column(
@@ -59,7 +62,7 @@ class notes_Item extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 30,
                 ),
                 Text('date : 12:22:01'),
                 SizedBox(

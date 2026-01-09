@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/consts.dart';
+import 'package:store_app/widgets/custom_Button.dart';
+import 'package:store_app/widgets/textField.dart';
 
 class addItem extends StatelessWidget {
   const addItem({
@@ -8,19 +11,34 @@ class addItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
+        backgroundColor: kSecondyColor,
         onPressed: () {
           showModalBottomSheet(
             context: context,
             builder: (context) {
               return Container(
-                height: 300,
-                child: Center(
-                  child: Text('data'),
-                ),
-              );
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    children: [
+                      textField(
+                        hintText: 'Title',
+                      ),
+                      textField(
+                        hintText: 'Description',
+                        maxLines: 10,
+                      ),
+                      customButton(
+                        text: 'Add Note',
+                        onTap: () {},
+                      )
+                    ],
+                  ));
             },
           );
         },
-        child: Icon(Icons.add));
+        child: Icon(
+          Icons.add,
+        ));
   }
 }

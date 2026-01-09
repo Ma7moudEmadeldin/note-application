@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:store_app/consts.dart';
 
 class customAppBar extends StatelessWidget {
   const customAppBar({
@@ -8,13 +9,12 @@ class customAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      shadowColor: Colors.grey,
+      shadowColor: kPrimaryColor,
       actions: [
         Container(
-          margin: EdgeInsets.all(6),
+          margin: EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 78, 78, 78),
-              borderRadius: BorderRadius.circular(10)),
+              color: kPrimaryColor, borderRadius: BorderRadius.circular(10)),
           child: Center(
               child: IconButton(onPressed: () {}, icon: Icon(Icons.search))),
         )
