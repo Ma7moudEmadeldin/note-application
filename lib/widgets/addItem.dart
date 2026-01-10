@@ -34,9 +34,22 @@ class addItem extends StatelessWidget {
                         if (state is AddNoteFailure) {
                           print(
                               'error while creating note${state.errorMessage}');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                  'Failed to add note: ${state.errorMessage}'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
                         }
                         if (state is AddNoteSucceffull) {
                           Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Note added successfully!'),
+                              backgroundColor: Colors.green,
+                            ),
+                          );
                         }
                       },
                       builder: (context, state) {
