@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:store_app/consts.dart';
 
 class textField extends StatelessWidget {
-  const textField({super.key, this.maxLines, required this.hintText});
+  const textField(
+      {super.key, this.maxLines, required this.hintText, this.onSave});
   final int? maxLines;
   final String hintText;
+  final void Function(String?)? onSave;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +19,15 @@ class textField extends StatelessWidget {
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
             child: Column(
               children: [
-                TextField(
+                TextFormField(
+                  onSaved: onSave,
+                  validator: (value) {
+                    if (value?.isEmpty ?? true) {
+                      return 'field is required';
+                    } else {
+                      return null;
+                    }
+                  },
                   maxLines: maxLines,
                   cursorColor: kPrimaryColor,
                   onChanged: (value) {},

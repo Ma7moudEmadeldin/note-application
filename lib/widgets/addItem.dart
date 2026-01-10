@@ -27,21 +27,7 @@ class addItem extends StatelessWidget {
                     decoration:
                         BoxDecoration(borderRadius: BorderRadius.circular(10)),
                     child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          textField(
-                            hintText: 'Title',
-                          ),
-                          textField(
-                            hintText: 'Description',
-                            maxLines: 10,
-                          ),
-                          customButton(
-                            text: 'Add Note',
-                            onTap: () {},
-                          )
-                        ],
-                      ),
+                      child: addNoteForm(),
                     )),
               );
             },
@@ -50,5 +36,59 @@ class addItem extends StatelessWidget {
         child: Icon(
           Icons.add,
         ));
+  }
+}
+
+class addNoteForm extends StatefulWidget {
+  addNoteForm({
+    super.key,
+  });
+
+  @override
+  State<addNoteForm> createState() => _addNoteFormState();
+}
+
+class _addNoteFormState extends State<addNoteForm> {
+  GlobalKey<FormState> key = GlobalKey();
+
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  String? title, description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      autovalidateMode: autovalidateMode,
+      key: key,
+      child: Column(
+        children: [
+          textField(
+            hintText: 'Title',
+            onSave: (data) {
+              title = data;
+            },
+          ),
+          textField(
+            hintText: 'Description',
+            maxLines: 10,
+            onSave: (data) {
+              description = data;
+            },
+          ),
+          customButton(
+            text: 'Add Note',
+            onTap: () {
+              if (key.currentState!.validate()) {
+                key.currentState!.save();
+              } else {
+                autovalidateMode = AutovalidateMode.always;
+              }
+              setState(() {});
+              // Navigator.pop(context);
+            },
+          )
+        ],
+      ),
+    );
   }
 }
