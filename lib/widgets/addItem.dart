@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:store_app/consts.dart';
+import 'package:store_app/cubit/addNoteCubit/add_note_cubit.dart';
 import 'package:store_app/widgets/addNote_form.dart';
 
 class addItem extends StatelessWidget {
@@ -22,12 +25,28 @@ class addItem extends StatelessWidget {
                 padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: SingleChildScrollView(
-                      child: addNoteForm(),
-                    )),
+                  width: MediaQuery.of(context).size.width,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                  child: SingleChildScrollView(
+                    child: BlocConsumer<AddNoteCubit, AddNoteState>(
+                      listener: (context, state) {
+                        if (state is AddNoteFailure) {
+                          print(
+                              'error while creating note${state.errorMessage}');
+                        }
+                        if (state is AddNoteSucceffull) {
+                          Navigator.pop(context);
+                        }
+                      },
+                      builder: (context, state) {
+                        return ModalProgressHUD(
+                            inAsyncCall: state is AddNoteLoading ? true : false,
+                            child: addNoteForm());
+                      },
+                    ),
+                  ),
+                ),
               );
             },
           );
