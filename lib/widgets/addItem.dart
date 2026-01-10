@@ -28,36 +28,33 @@ class addItem extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                  child: SingleChildScrollView(
-                    child: BlocConsumer<AddNoteCubit, AddNoteState>(
-                      listener: (context, state) {
-                        if (state is AddNoteFailure) {
-                          print(
-                              'error while creating note${state.errorMessage}');
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                  'Failed to add note: ${state.errorMessage}'),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
-                        }
-                        if (state is AddNoteSucceffull) {
-                          Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Note added successfully!'),
-                              backgroundColor: Colors.green,
-                            ),
-                          );
-                        }
-                      },
-                      builder: (context, state) {
-                        return ModalProgressHUD(
-                            inAsyncCall: state is AddNoteLoading ? true : false,
-                            child: addNoteForm());
-                      },
-                    ),
+                  child: BlocConsumer<AddNoteCubit, AddNoteState>(
+                    listener: (context, state) {
+                      if (state is AddNoteFailure) {
+                        print('error while creating note${state.errorMessage}');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                'Failed to add note: ${state.errorMessage}'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                      if (state is AddNoteSucceffull) {
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Note added successfully!'),
+                            backgroundColor: Colors.green,
+                          ),
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      return ModalProgressHUD(
+                          inAsyncCall: state is AddNoteLoading ? true : false,
+                          child: SingleChildScrollView(child: addNoteForm()));
+                    },
                   ),
                 ),
               );
