@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:store_app/consts.dart';
+import 'package:store_app/cubit/createNoteCubit/create_note_cubit.dart';
+import 'package:store_app/models/note_model.dart';
 
 class notes_Item extends StatelessWidget {
-  const notes_Item({
-    super.key,
-  });
-
+  notes_Item({super.key, required this.note});
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,7 +17,7 @@ class notes_Item extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: kPrimaryColor, borderRadius: BorderRadius.circular(10)),
+            color: Color(note.color), borderRadius: BorderRadius.circular(10)),
         height: 250,
         width: MediaQuery.of(context).size.width,
         child: Row(
@@ -29,7 +31,7 @@ class notes_Item extends StatelessWidget {
                   Padding(
                     padding: EdgeInsetsGeometry.only(left: 10),
                     child: Text(
-                      'Flutter TipsFlutter TipsFlutter Tips',
+                      note.title,
                       style: TextStyle(
                         fontSize: 28,
                       ),
@@ -42,7 +44,7 @@ class notes_Item extends StatelessWidget {
                   Padding(
                     padding: EdgeInsetsGeometry.only(left: 10),
                     child: Text(
-                      'build your career with mahmoudbuild your career with mahmoudbuild your career with mahmoud',
+                      note.desc,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                       style: TextStyle(color: Colors.grey),
@@ -62,7 +64,9 @@ class notes_Item extends StatelessWidget {
                     height: 1,
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      note.delete();
+                    },
                     icon: Icon(
                       Icons.delete,
                       size: 40,
@@ -71,7 +75,7 @@ class notes_Item extends StatelessWidget {
                   SizedBox(
                     height: 40,
                   ),
-                  Text('date : 12:22:01'),
+                  Text(note.date),
                   SizedBox(
                     height: 10,
                   )

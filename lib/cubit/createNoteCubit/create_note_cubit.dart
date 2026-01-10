@@ -11,11 +11,11 @@ class CreateNoteCubit extends Cubit<CreateNoteState> {
   createNote() {
     try {
       var note = Hive.box<NoteModel>(kNoteBox);
-
       List<NoteModel> notes = note.values.toList();
+
       emit(CreateNoteSuccess(notes));
     } catch (e) {
-      emit(CreateNoteFailure('error ${e.toString()}'));
+      emit(CreateNoteFailure('Error: ${e.toString()}'));
     }
   }
 }
