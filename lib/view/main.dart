@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:store_app/consts.dart';
 import 'package:store_app/view/editPage.dart';
 import 'package:store_app/widgets/addItem.dart';
 import 'package:store_app/widgets/custom_app_bar.dart';
 import 'package:store_app/widgets/notes_list_view.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox(kNoteBox);
   runApp(const shoppingApp());
 }
 
